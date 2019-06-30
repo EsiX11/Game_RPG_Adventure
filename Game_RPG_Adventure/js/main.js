@@ -7,3 +7,7 @@
         x.style.display = "none";
     }
 }
+function story() {
+    var x = document.getElementById("storyText");
+    x.innerHTML = "You're now looking around"
+}
