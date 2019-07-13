@@ -9,6 +9,8 @@
 
 <script>
 
+var biome_array = ["#006100", "0A944D", "#007BE1", "B8CCDD", "F14444", "E47C00"];
+
 var url = "https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/map1.json";
 
 const xhr = new XMLHttpRequest();
@@ -35,8 +37,14 @@ xhr.onload = function(e) {
 
         var td = document.createElement('TD');
         td.width = '25';
-        td.appendChild(document.createTextNode(
-            json[json._header + y]));
+
+        var td_text = json[json._header + y];
+
+        if (parseInt(td_text) > 0 && parseInt(td_text) < biome_array.length) {
+            td.setAttribute('bgcolor',biome_array[parseInt(td_text - 1)]);
+        }
+
+        td.appendChild(document.createTextNode(td_text));
 
         tr.appendChild(td); 
     }
