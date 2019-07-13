@@ -82,6 +82,9 @@ int main(int argc, char **argv){
     // get the amount of delimiters in a single line
     size_t input_delimiter_count = std::count(line.begin(), line.end(), ';');
 
+    // add so the number is correct
+    input_delimiter_count += input_delimiter_count ? 1 : 0;
+
     // close the file
     input_file.close();
 
