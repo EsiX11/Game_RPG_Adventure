@@ -9,5 +9,11 @@
 }
 function story() {
     var x = document.getElementById("storyText");
-    x.innerHTML = "You're now looking around"
+    x.innerHTML = "You're now looking around";
+}
+function darkTheme(){
+    var x = document.getElementById("css").href="css/darkTheme.css";
+}
+function lightTheme(){
+    var x = document.getElementById("css").href="css/lightTheme.css";
 }
