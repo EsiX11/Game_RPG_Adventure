@@ -40,7 +40,7 @@ xhr.onload = function(e) {
 
         var td_text = json[json._header + y];
 
-        if (parseInt(td_text) > 0 && parseInt(td_text) < biome_array.length) {
+        if (parseInt(td_text) > 0 && parseInt(td_text - 1) < biome_array.length) {
             td.setAttribute('bgcolor',biome_array[parseInt(td_text - 1)]);
         }
 
