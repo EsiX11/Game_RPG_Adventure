@@ -9,6 +9,8 @@
 #include "conversion.hpp"
 #include "file_check.hpp"
 
+using json = nlohmann::json;
+
 int main(int argc, char **argv){
 
     // check for enough options
@@ -66,21 +68,41 @@ int main(int argc, char **argv){
             line.erase(std::remove(line.begin(), line.end(), c), line.end());
         }
         
-        // check if the line is empty
-        if (!line.size()) {
-            continue;
-        }
-
         // add all the lines to the vector
         input_data.push_back(line);
     }
 
+    // set the position to the beginning of the file
+    input_file.clear();
+    input_file.seekg(0, input_file.beg);
+
+    // get the first line 
+    std::getline(input_file, line, '\n');
+
+    // get the amount of delimiters in a single line
+    size_t input_delimiter_count = std::count(line.begin(), line.end(), ';');
+
     // close the file
     input_file.close();
 
+    // create a json object
+    json j;
+
+    // store the size
+    j["_size"] = input_data.size();
+
+    // store the amount of delimiters in a single line
+    j["_delimiter_line_count"] = input_delimiter_count;
+
+    const std::string header = "map_part_";
+
+    j["_header"] = header;
+
     for (size_t i = 0; i < input_data.size(); i++) {
-        std::cout << input_data[i] << "\n";
+        j[header + std::to_string(i)] = input_data[i];
     }
+
+    output_file << j.dump(4);
 
     // close the file
     output_file.close();
