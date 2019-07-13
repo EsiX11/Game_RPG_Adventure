@@ -59,15 +59,23 @@ int main(int argc, char **argv){
     // temporary line data
     std::string line = "";
 
-    // characters we want to remove
-    const std::string removables = " \n\t";
-
     while (std::getline(input_file, line, ';')) {
-        // remove characters we don't need
-        for (char c: removables) {
-            line.erase(std::remove(line.begin(), line.end(), c), line.end());
-        }
+        // remove all space characters
+        line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
         
+        // split the line if we have a newline
+        auto t = line.find('\n');
+        if (t != std::string::npos) {
+            // we have a newline
+
+            std::string l = line.substr(0, t);
+
+            line = line.substr(t);
+
+            // remove the newline
+            line.erase(std::remove(line.begin(), line.end(), '\n'), line.end());
+        }
+
         // add all the lines to the vector
         input_data.push_back(line);
     }
@@ -79,11 +87,8 @@ int main(int argc, char **argv){
     // get the first line 
     std::getline(input_file, line, '\n');
 
-    // get the amount of delimiters in a single line
-    size_t input_delimiter_count = std::count(line.begin(), line.end(), ';');
-
-    // add so the number is correct
-    input_delimiter_count += input_delimiter_count ? 1 : 0;
+    // get the amount of data in a single line
+    size_t input_data_count = std::count(line.begin(), line.end(), ';') + 1;
 
     // close the file
     input_file.close();
@@ -95,7 +100,7 @@ int main(int argc, char **argv){
     j["_size"] = input_data.size();
 
     // store the amount of delimiters in a single line
-    j["_delimiter_line_count"] = input_delimiter_count;
+    j["_data_line_count"] = input_data_count;
 
     const std::string header = "map_part_";
 
