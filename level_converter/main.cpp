@@ -59,36 +59,40 @@ int main(int argc, char **argv){
     // temporary line data
     std::string line = "";
 
-    while (std::getline(input_file, line, ';')) {
-        // remove all space characters
-        line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
-        
-        // split the line if we have a newline
-        auto t = line.find('\n');
-        if (t != std::string::npos) {
-            // we have a newline
 
-            std::string l = line.substr(0, t);
+    // get the first line 
+    std::getline(input_file, line, '\n');
 
-            line = line.substr(t);
+    // get the amount of data in a single line
+    size_t input_data_count = std::count(line.begin(), line.end(), ';');
 
-            // remove the newline
-            line.erase(std::remove(line.begin(), line.end(), '\n'), line.end());
-        }
-
-        // add all the lines to the vector
-        input_data.push_back(line);
+    // correct the length of the data
+    if (line[line.length() - 1] == ';') {
+        input_data_count += 1;
     }
 
     // set the position to the beginning of the file
     input_file.clear();
     input_file.seekg(0, input_file.beg);
 
-    // get the first line 
-    std::getline(input_file, line, '\n');
+    while (std::getline(input_file, line, '\n')) {
+        // remove the spaces
+        line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
 
-    // get the amount of data in a single line
-    size_t input_data_count = std::count(line.begin(), line.end(), ';') + 1;
+        auto t = split(line, ';');
+
+        std::cout << t.size() << '\n';
+
+        for (std::string& s: t) {
+            // add all the lines to the vector
+            input_data.push_back(s);
+        }
+
+        // check if there is something after the last seperator
+        if (line[line.length() - 1] == ';') {
+            input_data.push_back("");
+        }        
+    }
 
     // close the file
     input_file.close();
