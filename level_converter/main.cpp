@@ -1,6 +1,8 @@
 // libraries
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <algorithm>
 
 // local files
 #include "json.hpp"
@@ -49,8 +51,38 @@ int main(int argc, char **argv){
         return -1;
     }
 
-    // close the files
+    // std for all data fields 
+    std::vector<std::string> input_data;
+
+    // temporary line data
+    std::string line = "";
+
+    // characters we want to remove
+    const std::string removables = " \n\t";
+
+    while (std::getline(input_file, line, ';')) {
+        // remove characters we don't need
+        for (char c: removables) {
+            line.erase(std::remove(line.begin(), line.end(), c), line.end());
+        }
+        
+        // check if the line is empty
+        if (!line.size()) {
+            continue;
+        }
+
+        // add all the lines to the vector
+        input_data.push_back(line);
+    }
+
+    // close the file
     input_file.close();
+
+    for (size_t i = 0; i < input_data.size(); i++) {
+        std::cout << input_data[i] << "\n";
+    }
+
+    // close the file
     output_file.close();
 
     return 0;
