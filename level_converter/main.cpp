@@ -81,8 +81,6 @@ int main(int argc, char **argv){
 
         auto t = split(line, ';');
 
-        std::cout << t.size() << '\n';
-
         for (std::string& s: t) {
             // add all the lines to the vector
             input_data.push_back(s);
