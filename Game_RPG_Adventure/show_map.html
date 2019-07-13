@@ -2,24 +2,51 @@
 <html>
 <body>
 
-<script>
 
-fetch("map1.json")
-  .then(response => response.json())
-  .then(json => console.log(json));
+<h2>Map viewer</h2>
 
-</script>
-
-
-<h2>Create Object from JSON String</h2>
-
-<p id="demo"></p>
+<div id="map_table"></div>
 
 <script>
 
-var obj = JSON.parse(json);
+var url = "https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/map1.json";
 
-document.getElementById("demo").innerHTML = obj[obj._header + '100'] + ", " + obj._size;
+const xhr = new XMLHttpRequest();
+xhr.open('GET', url);
+xhr.responseType = 'json';
+xhr.onload = function(e) {
+  if (this.status == 200) {
+    var json = this.response;
+    
+    var table_div = document.getElementById("map_table");
+
+    var table = document.createElement('TABLE');
+    table.border = '1';
+    var table_body = document.createElement('TBODY');
+    table.appendChild(table_body);
+
+    for (y = 0; y < json._size; y++) {
+        if (y % json._data_line_count == 0) {
+            var tr = document.createElement('TR');
+            table_body.appendChild(tr);
+        }
+
+        console.log(y, json[json._header + y]);
+
+        var td = document.createElement('TD');
+        td.width = '25';
+        td.appendChild(document.createTextNode(
+            json[json._header + y]));
+
+        tr.appendChild(td); 
+    }
+
+    table_div.appendChild(table);
+  }
+};
+xhr.send();
+
+
 </script>
 
 </body>
