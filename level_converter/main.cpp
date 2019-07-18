@@ -59,7 +59,6 @@ int main(int argc, char **argv){
     // temporary line data
     std::string line = "";
 
-
     // get the first line 
     std::getline(input_file, line, '\n');
 
