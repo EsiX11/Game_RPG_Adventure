@@ -1,0 +1,20 @@
+{
+"_itemNumber": 1,
+"_displayName": "Vote for Recardo",
+"_name": "pamphlet_1",
+"_usable": 0, 
+"_combinedUse": 0,
+"_combinedUseWith": "[Item number]",
+"_itemUse":"A description of what the items does",
+"_itemSuccesfullUse":"A description of what happend after it was succesfully used",
+"_ItemFailedUse":"A description of what happened after a failed use with the item",
+"_description": "The pamphlet seems to be from some political campaign. By the looks of it its been laying here for a while. It's all crumbled",
+"_displayText": 1,
+"_text": "The pamphlet reads: Vote for Recardo and I'll shred (players name)",
+"_reaction": 1,
+"_reactionText": "What isn't that my name. It can't be. But it's the exact same. What's going on here.",
+"_reactionAfter": 1,
+"_reactionAfterText": "Did they put me here? No way the wouldn't do that to another polictical Opponent would they?", 
+"_extraInfo": 0,
+"_extraInfoText":""
+}

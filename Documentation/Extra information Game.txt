@@ -1,0 +1,45 @@
+Features to disguist/ to add to the list
+1. Name of player as name of character
+	have the name on the pamphlet change to the name that is input.
+2. Items
+	Every item has it's own JSON file with its information regarding the item.
+	There has to be a standart way of making the items JSON file so every file is coded the same way.
+	E.G:
+	{
+		"_itemNumber": 1,
+		"_displayName": "Vote for Recardo",
+		"_name": "pamphlet_1",
+		"_usable": 0, #0 being no. 1 being yes.
+		"_combinedUse": 0, #0 being no. 1 being yes.
+		"_combinedUseWith": [Item number],
+		"_itemUse":"A description of what the items does",
+		"_itemSuccesfullUse":"A description of what happend after it was succesfully used",
+		"_ItemFailedUse":"A description of what happened after a failed use with the item",
+		"_description": "The pamphlet seems to be from some political campaign. By the looks of it its been laying here for a while. It's all crumbled"
+		"_displayText": 1, #0 being no. 1 being yes.
+		"_text": "The pamphlet reads: Vote for Recardo and I'll shred (players name)",
+		"_reaction": 1, #0 being no. 1 being yes.
+		"_reactionText": "What isn't that my name. It can't be. But it's the exact same. What's going on here.",
+		"_reactionAfter": 1, #0 being no. 1 being yes.
+		"_reactionAfterText": "Did they put me here? No way the wouldn't do that to another polictical Opponent would they? 
+		"_extraInfo": 0, #0 being no. 1 being yes.
+		"_extraInfoText":"",	
+	}
+	and possible other information. But every file will look the same. Even if one item doesn't have reactionText the file will just include blank.
+3. Backlog
+	A way for the player to read all the text that has been told to them in order it's been told to them.
+
+4. Back and Next button in textbox
+	So the system can detirement wether the player has finished the reading.
+	
+5. Clickable Items in the itembox
+	The player can click on the name of the item to unlock a list with buttons to use with the items. E.G the read button to re-read what was on the item.
+
+6. A welcome screen
+	A page before they enter the game welcoming them.
+	
+7. A version number in the bottom right
+	title says it all
+
+8. As uniform as we can make it
+	So if we want to add anything it's as easy as making the code in the first place.
