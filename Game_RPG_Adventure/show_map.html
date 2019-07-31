@@ -36,12 +36,12 @@ function get_biome_color(index) {
         return "#FFFFFF";
     }
 
-    if (index < 0 || (index - 1) >= biome_array.length) {
+    if (index <= 0 || (index - 1) >= biome_array.length) {
         // value is out of index
         return "#FFFFFF";
     }
-
-    // value within index
+    
+    // value within index        
     return biome_array[index - 1];
 }
 
@@ -67,7 +67,7 @@ function create_table(table_div, table_array) {
             var td_value = table_array[i][j];
 
             // set the color of the table entry
-            td.setAttribute('bgcolor', get_biome_color(parseInt(td_value) - 1));
+            td.setAttribute('bgcolor', get_biome_color(parseInt(td_value)));
 
             // append the text to the entry
             td.appendChild(document.createTextNode(td_value));
