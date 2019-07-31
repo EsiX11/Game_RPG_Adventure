@@ -1,3 +1,14 @@
+// class for the player position
+class xy {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+// variable for storing the location of the player
+var player_location = new xy(0, 0);
+
 // handler for all the key presses
 function keypress_handler(event) {
     console.log("Keyboard button pressed", event.keyCode);   
@@ -5,8 +16,22 @@ function keypress_handler(event) {
 
 // handler for the buttons
 function move_direction(evt) {
-    // print the button id
-    console.log("Button pressed", evt.target.button_id);
+    switch (evt.target.direction) {
+        case 0:
+            player_location.y += 1;
+            break;
+        case 1:
+            player_location.x += 1;
+            break;
+        case 2:
+            player_location.y -= 1;
+            break;
+        case 3:
+            player_location.x -= 1;
+            break;
+    }
+
+    console.log(player_location);
 }
 
 // for keypresses we can use one of the following listeners
@@ -30,7 +55,7 @@ for (var i = 0; i < buttons.length; i++) {
     }
 
     // set the button id of the button
-    buttons[i].button_id = i;
+    buttons[i].direction = i;
 
     // add the click listener to the button
     buttons[i].addEventListener("click", move_direction);
