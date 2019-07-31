@@ -2,55 +2,102 @@
 <html>
 <body>
 
-
 <h2>Map viewer</h2>
 
 <div id="map_table"></div>
 
 <script>
 
-var biome_array = ["#006100", "0A944D", "#007BE1", "B8CCDD", "F14444", "E47C00"];
+// colors for the biomes TODO: make this configurable
+var biome_array = ["#006100", "0A944D", "#007BE1", "B8CCDD", "F14444", "E47C00", "#D8BFD8", "#D2B48C"];
 
+// formats the json to a array for easier setup
+function format_json(json, index) {
+    var table = new Array();
+
+    for (var i = 0; i < json._size; i += json._data_line_count) {
+        var t = new Array();
+
+        // add all map rows to the row array
+        for (var j = 0; j < json._data_line_count; j++) {
+            t.push(json[json._header + (i + j)]);
+        }
+
+        // add to the total table
+        table.push(t);
+    }
+
+    return table;
+}
+
+function get_biome_color(index) {
+    if (isNaN(index)) {
+        // value is not filled in
+        return "#FFFFFF";
+    }
+
+    if (index < 0 || (index - 1) >= biome_array.length) {
+        // value is out of index
+        return "#FFFFFF";
+    }
+
+    // value within index
+    return biome_array[index - 1];
+}
+
+function create_table(table_div, table_array) {
+    // create a table
+    var table = document.createElement('TABLE');
+
+    table.border = '1';
+
+    var table_body = document.createElement('TBODY');
+    table.appendChild(table_body);
+
+    // loop through the size of the json
+    for (i = 0; i < table_array.length; i++) {
+        var tr = document.createElement('TR');
+
+        for (var j = 0; j < table_array[i].length; j++) { 
+            var td = document.createElement('TD');
+            
+            td.width = '25';
+
+            // get the value 
+            var td_value = table_array[i][j];
+
+            // set the color of the table entry
+            td.setAttribute('bgcolor', get_biome_color(parseInt(td_value) - 1));
+
+            // append the text to the entry
+            td.appendChild(document.createTextNode(td_value));
+
+            // add the entry to the row
+            tr.appendChild(td); 
+        }
+
+        // add the row to the table
+        table_body.appendChild(tr);
+    }
+
+    // add the table to the table div
+    table_div.appendChild(table);
+}
+
+// get it with a url as we can't load a local file
 var url = "https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/map1.json";
 
 const xhr = new XMLHttpRequest();
 xhr.open('GET', url);
 xhr.responseType = 'json';
 xhr.onload = function(e) {
-  if (this.status == 200) {
-    var json = this.response;
-    
-    var table_div = document.getElementById("map_table");
-
-    var table = document.createElement('TABLE');
-    table.border = '1';
-    var table_body = document.createElement('TBODY');
-    table.appendChild(table_body);
-
-    for (y = 0; y < json._size; y++) {
-        if (y % json._data_line_count == 0) {
-            var tr = document.createElement('TR');
-            table_body.appendChild(tr);
-        }
-
-        console.log(y, json[json._header + y]);
-
-        var td = document.createElement('TD');
-        td.width = '25';
-
-        var td_text = json[json._header + y];
-
-        if (parseInt(td_text) > 0 && parseInt(td_text - 1) < biome_array.length) {
-            td.setAttribute('bgcolor',biome_array[parseInt(td_text - 1)]);
-        }
-
-        td.appendChild(document.createTextNode(td_text));
-
-        tr.appendChild(td); 
+    // check if the response is correct
+    if (this.status != 200) {
+        return;
     }
 
-    table_div.appendChild(table);
-  }
+    // create a table in the map_table with the json response
+    create_table(document.getElementById("map_table") , format_json(this.response));
 };
 xhr.send();
 
