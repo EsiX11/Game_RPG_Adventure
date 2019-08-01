@@ -1,0 +1,26 @@
+Legend for the CSV map:
+0-9   = Area
+10-99 = Special Location
+100-999 = Items
+Area:
+	0 = Plain
+	1 = Forest
+	2 = Water
+	3 = Mist
+	4 = Plain higher ground
+	5 = Snow
+	6 = Cliff upwards
+	7 = Cliff downwards
+	
+Special Location:
+	10 = Shed
+	11 = campfire
+	12 = Look out point to time billboard
+	13 = entrace to higher ground
+	14 = entrace to lower ground
+	15 = Above ground pipe with valve
+	16 = exit once all puzzles are done
+	
+Items:
+	100 = Winter coat
+	101 = wrench
