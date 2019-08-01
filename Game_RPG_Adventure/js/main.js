@@ -8,6 +8,7 @@
     }
 }
 var storyNumber = -1;
+var headerNumber = 1;
 function story(number) {
     if (number < 0){
         storyNumber = 0;
@@ -21,7 +22,7 @@ function story(number) {
       if (this.status == 200) {
         var json = this.response;
         var storyBox = document.getElementById("storyText");
-        storyBox.innerHTML = json.story[number];
+        storyBox.innerHTML = json.json.header+headerNumber[number];
         console.log(number);
         }
     }
