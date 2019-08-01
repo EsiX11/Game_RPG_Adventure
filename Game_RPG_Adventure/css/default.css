@@ -4,7 +4,18 @@
     font-size: 50px;
     font-family: Arial, Helvetica, sans-serif;
 }
-
+button{
+    margin: 1px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: 1px #33AB20;
+    width: 90px;
+    height: 43px; 
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .Button {
     margin: 5px;
     background-color: #4CAF50; /* Green */
