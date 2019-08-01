@@ -7,4 +7,3 @@ set(SOURCES main.cpp)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(level_editor ${SOURCES})
-# target_link_libraries(sfml sfml-graphics sfml-audio sfml-system)
