@@ -7,8 +7,12 @@
         x.style.display = "none";
     }
 }
-var storyNumber = 0;
-function story(storyNumber) {
+var storyNumber = -1;
+function story(number) {
+    if (number < 0){
+        storyNumber = 0;
+        number = 0;
+    }
     var url = "https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/story.json";
     const jFile = new XMLHttpRequest();
     jFile.open('GET', url);
@@ -17,13 +21,10 @@ function story(storyNumber) {
       if (this.status == 200) {
         var json = this.response;
         var storyBox = document.getElementById("storyText");
-        storyBox.innerHTML = json.story[storyNumber];
-        console.log(storyNumber);
+        storyBox.innerHTML = json.story[number];
+        console.log(number);
         }
     }
     jFile.send();
-}
 
-function test(){
-    story(storyNumber++)
 }
