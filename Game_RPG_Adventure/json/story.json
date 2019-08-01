@@ -1,5 +1,10 @@
 {
+    "maxText": 5,
     "header": "storyText",
+    "story": ["Hello and welcome to our game","You wake up in a damp room","There is no more text"],
     "storyText0": "Hello and welcome to our game",
-    "storyText1": "You wake up in a damp room"
+    "storyText1": "You wake up in a damp room",
+    "storyText2": "There is no more text",
+    "storyText3": "There is no more text1",
+    "storyText4": "Even less text here"
 }
