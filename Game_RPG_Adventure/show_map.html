@@ -11,25 +11,6 @@
 // colors for the biomes TODO: make this configurable
 var biome_array = ["#006100", "0A944D", "#007BE1", "B8CCDD", "F14444", "E47C00", "#D8BFD8", "#D2B48C"];
 
-// formats the json to a array for easier setup
-function format_json(json, index) {
-    var table = new Array();
-
-    for (var i = 0; i < json._size; i += json._data_line_count) {
-        var t = new Array();
-
-        // add all map rows to the row array
-        for (var j = 0; j < json._data_line_count; j++) {
-            t.push(json[json._header + (i + j)]);
-        }
-
-        // add to the total table
-        table.push(t);
-    }
-
-    return table;
-}
-
 function get_biome_color(index) {
     if (isNaN(index)) {
         // value is not filled in
@@ -97,7 +78,7 @@ xhr.onload = function(e) {
     }
 
     // create a table in the map_table with the json response
-    create_table(document.getElementById("map_table") , format_json(this.response));
+    create_table(document.getElementById("map_table") , this.response["_map"]);
 };
 xhr.send();
 
