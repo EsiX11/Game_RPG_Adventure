@@ -1,4 +1,7 @@
-﻿h1 {
+﻿body{
+    zoom: 1.5;
+}
+h1 {
     text-align: center;
     margin-bottom: 100px;
     font-size: 50px;
@@ -29,18 +32,22 @@ button{
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
 }
-#storyText {
+#storyBorder {
     margin: 20px;
     border-width: 2px;
     border-style: solid;
     border-color: #33AB20;
     width: 500px;
     height: 300px;
-    font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
     display: inline-block;
 }
-#inventory {
+#storyText{
+    font-size: 18px;    
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+#inventoryBorder{
     display: inline-block;
     margin: 20px;
     border-width: 2px;
@@ -48,6 +55,8 @@ button{
     border-color: #33AB20;
     width: 500px;
     height: 300px;
+}
+#inventoryText {
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
 }
