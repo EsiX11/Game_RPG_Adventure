@@ -263,3 +263,4 @@ __pycache__/
 # vscode files
 .vscode/
 
+.DS_Store
