@@ -10,8 +10,8 @@
     <div id="boxes">
         <div id="storyBorder">
             <p id="storyText">This is a test text</p>
-            <button id="buttonNext" style="position:absolute;bottom:0px;right:0px;display:inline-block" onclick="story(storyNumber += 1, 2);">Next</button>
-            <button id="buttonBack" style="position:absolute;bottom:0px;left:0px;display:none" onclick="story(storyNumber -= 1, 2);">Back</button> 
+            <button id="buttonNext" style="position:absolute;bottom:0px;right:0px;display:inline-block" onclick="story(storyNumber += 1, 1);">Next</button>
+            <button id="buttonBack" style="position:absolute;bottom:0px;left:0px;display:none" onclick="story(storyNumber -= 1, 1);">Back</button> 
         </div>
         <div id="inventoryBorder">
             <p id="inventoryText">This is a item</p>
@@ -19,7 +19,7 @@
     </div>
     <div style="margin-left: 20px">
         <button onclick="story(5,2);">Grab</button>
-        <button onclick="story()">Look</button>
+        <button onclick="story(1,1)">Look</button>
         <button onclick="move()">Move</button>
         <button>This</button>
         <button>Look</button>

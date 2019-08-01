@@ -54,17 +54,15 @@ function story(number, headerNumber) {
         }
         if (number >= storyHeader.length){
             number = storyHeader.length - 1;
-            console.log("Uuhm")
         }
         storyBox.innerHTML = storyHeader[number];
-        console.log(number);
         }
     }
     jFile.send();
+}
 function darkTheme(){
     var x = document.getElementById("css").href="css/darkTheme.css";
 }
 function lightTheme(){
     var x = document.getElementById("css").href="css/lightTheme.css";
-}
 }
