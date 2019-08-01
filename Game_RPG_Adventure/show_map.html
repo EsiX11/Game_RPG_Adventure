@@ -17,7 +17,7 @@ function get_biome_color(index) {
         return "#FFFFFF";
     }
 
-    if (index <= 0 || (index - 1) >= biome_array.length) {
+    if (index < 0 || index >= biome_array.length) {
         // value is out of index
         return "#FFFFFF";
     }
