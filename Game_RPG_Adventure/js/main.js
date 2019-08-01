@@ -17,7 +17,7 @@ function story(storyNumber) {
       if (this.status == 200) {
         var json = this.response;
         var storyBox = document.getElementById("storyText");
-        storyBox.innerHTML = json[json.header + storyNumber];
+        storyBox.innerHTML = json.story[storyNumber];
         console.log(storyNumber);
         }
     }
