@@ -9,31 +9,33 @@
 }
 function hideButtonNext() {
     var x = document.getElementById("buttonNext");
-    if (x.style.display === "none") {
-        x.style.display = "inline-block";
-    }
-    else {
-        x.style.display = "none";
-    }
+    x.style.display = "none";
+}
+function showButtonNext() {
+    var x = document.getElementById("buttonNext");
+    x.style.display = "inline-block";
 }
 function hideButtonBack() { 
     var x = document.getElementById("buttonBack");
-    if (x.style.display === "none") {
-        x.style.display = "inline-block";
-    }
-    else {
-        x.style.display = "none";
-    }
+    x.style.display = "none";
+}
+function showButtonBack() { 
+    var x = document.getElementById("buttonBack");
+    x.style.display = "inline-block";
+
 }
 var storyNumber = -1;
 var headerNumber = 0;
 function story(number, headerNumber) {
+    if (number < 1){
+        hideButtonBack();
+    }
     if (number < 0){
         storyNumber = 0;
         number = 0;
     }
     if (number === 1){
-        hideButtonBack();
+        showButtonBack();
     }
     var url = "https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/story.json";
     const jFile = new XMLHttpRequest();
@@ -44,9 +46,14 @@ function story(number, headerNumber) {
         var json = this.response;
         var storyBox = document.getElementById("storyText");
         var storyHeader = json[json.header+headerNumber];
+        if (number < storyHeader.length){
+            showButtonNext();
+        }
+        if (number >= storyHeader.length - 1){
+            hideButtonNext();
+        }
         if (number >= storyHeader.length){
             number = storyHeader.length - 1;
-            hideButtonNext();
             console.log("Uuhm")
         }
         storyBox.innerHTML = storyHeader[number];
