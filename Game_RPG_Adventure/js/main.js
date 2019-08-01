@@ -8,8 +8,8 @@
     }
 }
 var storyNumber = -1;
-var headerNumber = 1;
-function story(number) {
+var headerNumber = 0;
+function story(number, headerNumber) {
     if (number < 0){
         storyNumber = 0;
         number = 0;
@@ -18,11 +18,17 @@ function story(number) {
     const jFile = new XMLHttpRequest();
     jFile.open('GET', url);
     jFile.responseType = 'json';
+    
     jFile.onload = function(e) {
       if (this.status == 200) {
         var json = this.response;
         var storyBox = document.getElementById("storyText");
-        storyBox.innerHTML = json.json.header+headerNumber[number];
+        var storyHeader = json[json.header+headerNumber];
+        if (number >= storyHeader.length){
+            number = storyHeader.length - 1;
+            console.log("Uuhm")
+        }
+        storyBox.innerHTML = storyHeader[number];
         console.log(number);
         }
     }
