@@ -1,10 +1,24 @@
-﻿h1 {
+﻿body{
+    zoom: 1.5;
+}
+h1 {
     text-align: center;
     margin-bottom: 100px;
     font-size: 50px;
     font-family: Arial, Helvetica, sans-serif;
 }
-
+button{
+    margin: 1px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: 1px #33AB20;
+    width: 90px;
+    height: 43px; 
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .Button {
     margin: 5px;
     background-color: #4CAF50; /* Green */
@@ -18,18 +32,22 @@
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
 }
-#storyText {
+#storyBorder {
     margin: 20px;
     border-width: 2px;
     border-style: solid;
     border-color: #33AB20;
     width: 500px;
     height: 300px;
-    font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
     display: inline-block;
 }
-#inventory {
+#storyText{
+    font-size: 18px;    
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+#inventoryBorder{
     display: inline-block;
     margin: 20px;
     border-width: 2px;
@@ -37,6 +55,8 @@
     border-color: #33AB20;
     width: 500px;
     height: 300px;
+}
+#inventoryText {
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
 }
