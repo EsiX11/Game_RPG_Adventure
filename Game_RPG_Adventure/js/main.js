@@ -18,7 +18,6 @@ function story(number, headerNumber) {
     const jFile = new XMLHttpRequest();
     jFile.open('GET', url);
     jFile.responseType = 'json';
-    
     jFile.onload = function(e) {
       if (this.status == 200) {
         var json = this.response;
