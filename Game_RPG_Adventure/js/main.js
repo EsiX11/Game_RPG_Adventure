@@ -66,5 +66,5 @@ function darkTheme(){
 }
 function lightTheme(){
     var x = document.getElementById("css").href="css/lightTheme.css";
-
+}
 }
