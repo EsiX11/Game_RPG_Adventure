@@ -59,31 +59,37 @@ int main(int argc, char **argv){
     // temporary line data
     std::string line = "";
 
-    // characters we want to remove
-    const std::string removables = " \n\t";
+    // get the first line 
+    std::getline(input_file, line, '\n');
 
-    while (std::getline(input_file, line, ';')) {
-        // remove characters we don't need
-        for (char c: removables) {
-            line.erase(std::remove(line.begin(), line.end(), c), line.end());
-        }
-        
-        // add all the lines to the vector
-        input_data.push_back(line);
+    // get the amount of data in a single line
+    size_t input_data_count = std::count(line.begin(), line.end(), ';');
+
+    // correct the length of the data
+    if (line[line.length() - 1] == ';') {
+        input_data_count += 1;
     }
 
     // set the position to the beginning of the file
     input_file.clear();
     input_file.seekg(0, input_file.beg);
 
-    // get the first line 
-    std::getline(input_file, line, '\n');
+    while (std::getline(input_file, line, '\n')) {
+        // remove the spaces
+        line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
 
-    // get the amount of delimiters in a single line
-    size_t input_delimiter_count = std::count(line.begin(), line.end(), ';');
+        auto t = split(line, ';');
 
-    // add so the number is correct
-    input_delimiter_count += input_delimiter_count ? 1 : 0;
+        for (std::string& s: t) {
+            // add all the lines to the vector
+            input_data.push_back(s);
+        }
+
+        // check if there is something after the last seperator
+        if (line[line.length() - 1] == ';') {
+            input_data.push_back("");
+        }        
+    }
 
     // close the file
     input_file.close();
@@ -95,7 +101,7 @@ int main(int argc, char **argv){
     j["_size"] = input_data.size();
 
     // store the amount of delimiters in a single line
-    j["_delimiter_line_count"] = input_delimiter_count;
+    j["_data_line_count"] = input_data_count;
 
     const std::string header = "map_part_";
 

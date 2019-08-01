@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<h2>Map viewer</h2>
+
+<div id="map_table"></div>
+
+<script>
+
+var biome_array = ["#006100", "0A944D", "#007BE1", "B8CCDD", "F14444", "E47C00"];
+
+var url = "https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/map1.json";
+
+const xhr = new XMLHttpRequest();
+xhr.open('GET', url);
+xhr.responseType = 'json';
+xhr.onload = function(e) {
+  if (this.status == 200) {
+    var json = this.response;
+    
+    var table_div = document.getElementById("map_table");
+
+    var table = document.createElement('TABLE');
+    table.border = '1';
+    var table_body = document.createElement('TBODY');
+    table.appendChild(table_body);
+
+    for (y = 0; y < json._size; y++) {
+        if (y % json._data_line_count == 0) {
+            var tr = document.createElement('TR');
+            table_body.appendChild(tr);
+        }
+
+        console.log(y, json[json._header + y]);
+
+        var td = document.createElement('TD');
+        td.width = '25';
+
+        var td_text = json[json._header + y];
+
+        if (parseInt(td_text) > 0 && parseInt(td_text - 1) < biome_array.length) {
+            td.setAttribute('bgcolor',biome_array[parseInt(td_text - 1)]);
+        }
+
+        td.appendChild(document.createTextNode(td_text));
+
+        tr.appendChild(td); 
+    }
+
+    table_div.appendChild(table);
+  }
+};
+xhr.send();
+
+
+</script>
+
+</body>
+</html>

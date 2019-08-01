@@ -1,11 +1,4 @@
-﻿body {
-    /* Uncomment this to enable scrolling and zooming
-  touch-action: manipulation;
-  */
-    height: 100%;
-;
-}
-h1 {
+﻿h1 {
     text-align: center;
     margin-bottom: 100px;
     font-size: 50px;
