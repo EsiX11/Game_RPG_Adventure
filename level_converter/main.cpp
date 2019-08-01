@@ -11,6 +11,8 @@
 
 using json = nlohmann::json;
 
+const std::string map_name = "map";
+
 int main(int argc, char **argv){
 
     // check for enough options
@@ -53,45 +55,31 @@ int main(int argc, char **argv){
         return -1;
     }
 
-    // std for all data fields 
-    std::vector<std::string> input_data;
-
     // temporary line data
     std::string line = "";
 
+    // std for all data fields 
+    std::vector<std::vector<std::string>> input_data;
 
-    // get the first line 
-    std::getline(input_file, line, '\n');
+    for (size_t i = 0; std::getline(input_file, line, '\r'); i++) {
+        input_data.push_back(std::vector<std::string>());
 
-    // get the amount of data in a single line
-    size_t input_data_count = std::count(line.begin(), line.end(), ';');
-
-    // correct the length of the data
-    if (line[line.length() - 1] == ';') {
-        input_data_count += 1;
-    }
-
-    // set the position to the beginning of the file
-    input_file.clear();
-    input_file.seekg(0, input_file.beg);
-
-    while (std::getline(input_file, line, '\n')) {
-        // remove the spaces
+        // // remove the spaces
         line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
+        // // remove the cariage return
+        line.erase(std::remove(line.begin(), line.end(), '\n'), line.end());
 
         auto t = split(line, ';');
 
-        std::cout << t.size() << '\n';
-
         for (std::string& s: t) {
             // add all the lines to the vector
-            input_data.push_back(s);
+            input_data[i].push_back(s);
         }
 
         // check if there is something after the last seperator
         if (line[line.length() - 1] == ';') {
-            input_data.push_back("");
-        }        
+            input_data[i].push_back("");
+        }      
     }
 
     // close the file
@@ -100,20 +88,13 @@ int main(int argc, char **argv){
     // create a json object
     json j;
 
-    // store the size
-    j["_size"] = input_data.size();
+    // store the name of the map
+    j["_map_name"] = map_name;
 
-    // store the amount of delimiters in a single line
-    j["_data_line_count"] = input_data_count;
+    // store the array of the map
+    j["_map"] = input_data;
 
-    const std::string header = "map_part_";
-
-    j["_header"] = header;
-
-    for (size_t i = 0; i < input_data.size(); i++) {
-        j[header + std::to_string(i)] = input_data[i];
-    }
-
+    // write the json output to the output file
     output_file << j.dump(4);
 
     // close the file

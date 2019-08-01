@@ -61,5 +61,10 @@ function story(number, headerNumber) {
         }
     }
     jFile.send();
+function darkTheme(){
+    var x = document.getElementById("css").href="css/darkTheme.css";
+}
+function lightTheme(){
+    var x = document.getElementById("css").href="css/lightTheme.css";
 
 }

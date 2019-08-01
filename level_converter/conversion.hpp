@@ -5,17 +5,21 @@
 #include <sstream>
 #include <iostream>
 
-/*
-std::string split implementation by using delimiter as a character.
-*/
-std::vector<std::string> split(std::string strToSplit, char delimeter)
-{
-    std::stringstream ss(strToSplit);
+/**
+ * @brief std::string split implementation by using delimiter as a character.
+ * 
+ * @param str_to_split 
+ * @param delimeter 
+ * @return std::vector<std::string> 
+ */
+std::vector<std::string> split(std::string str_to_split, char delimeter) {
+    std::stringstream ss(str_to_split);
     std::string item;
-    std::vector<std::string> splittedStrings;
-    while (std::getline(ss, item, delimeter))
-    {
-       splittedStrings.push_back(item);
+    std::vector<std::string> splitted_strings;
+
+    while (std::getline(ss, item, delimeter)) {
+       splitted_strings.push_back(item);
     }
-    return splittedStrings;
+
+    return splitted_strings;
 }

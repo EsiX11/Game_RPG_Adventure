@@ -3,6 +3,7 @@
 <head>
     <title>The Game</title>
     <link href="css/default.css" rel="stylesheet" />
+    <link id="css" href="css/darkTheme.css" rel="stylesheet" />
     <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
@@ -18,15 +19,19 @@
     </div>
     <div style="margin-left: 20px">
         <button onclick="story(5,2);">Grab</button>
+        <button onclick="story()">Look</button>
         <button onclick="move()">Move</button>
         <button>This</button>
         <button>Look</button>
     </div>
     <div id="move" style="display:none">
-        <button onclick="move()">North</button>
-        <button onclick="move()">East</button>
-        <button onclick="move()">South</button>
-        <button onclick="move()">West</button>
+        <button id="move_north">North</button>
+        <button id="move_east">East</button>
+        <button id="move_south">South</button>
+        <button id="move_west">West</button>
     </div>
 </body>
+    <!-- script for moving logic this needs to be after 
+         the buttons otherwise they dont exist -->
+    <script src="js/player/input.js"></script>
 </html>

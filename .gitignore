@@ -263,3 +263,5 @@ __pycache__/
 # vscode files
 .vscode/
 
+# mac
+.DS_Store
