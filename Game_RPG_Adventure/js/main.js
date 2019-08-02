@@ -27,15 +27,9 @@ function showButtonBack() {
 var storyNumber = -1;
 var headerNumber = 0;
 function story(number, headerNumber) {
-    if (number < 1){
-        hideButtonBack();
-    }
     if (number < 0){
         storyNumber = 0;
         number = 0;
-    }
-    if (number === 1){
-        showButtonBack();
     }
     var url = "https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/story.json";
     const jFile = new XMLHttpRequest();
@@ -46,15 +40,10 @@ function story(number, headerNumber) {
         var json = this.response;
         var storyBox = document.getElementById("storyText");
         var storyHeader = json[json.header+headerNumber];
-        if (number < storyHeader.length){
-            showButtonNext();
-        }
-        if (number >= storyHeader.length - 1){
-            hideButtonNext();
-        }
         if (number >= storyHeader.length){
             number = storyHeader.length - 1;
         }
+        disableEnableTextButton(number,storyHeader);
         storyBox.innerHTML = storyHeader[number];
         }
     }
@@ -65,4 +54,18 @@ function darkTheme(){
 }
 function lightTheme(){
     var x = document.getElementById("css").href="css/lightTheme.css";
+}
+function disableEnableTextButton(number,storyHeader){
+    if (number < storyHeader.length){
+        showButtonNext();
+    }
+    if (number >= storyHeader.length - 1){
+        hideButtonNext();
+    }
+    if (number === 1){
+        showButtonBack();
+    }
+    if (number < 1){
+        hideButtonBack();
+    }
 }
