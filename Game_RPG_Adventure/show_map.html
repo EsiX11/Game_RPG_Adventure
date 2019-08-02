@@ -6,6 +6,8 @@
 
 <div id="map_table"></div>
 
+<script src="js/json/json_loader.js"></script>
+
 <script>
 
 // colors for the biomes TODO: make this configurable
@@ -68,20 +70,11 @@ function create_table(table_div, table_array) {
 // get it with a url as we can't load a local file
 var url = "https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/map1.json";
 
-const xhr = new XMLHttpRequest();
-xhr.open('GET', url);
-xhr.responseType = 'json';
-xhr.onload = function(e) {
-    // check if the response is correct
-    if (this.status != 200) {
-        return;
-    }
-
-    // create a table in the map_table with the json response
-    create_table(document.getElementById("map_table") , this.response["_map"]);
-};
-xhr.send();
-
+// create a table in the map_table with the json response
+load_json(url)
+    .then(function(json) {
+        create_table(document.getElementById("map_table") , json["_map"]);
+    });
 
 </script>
 
