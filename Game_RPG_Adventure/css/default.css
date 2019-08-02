@@ -9,9 +9,9 @@ h1 {
 }
 button{
     margin: 1px;
-    background-color: #33AB20; /* Green */
+    background-color: #0099FF; 
     color: white;
-    border: 1px #33AB20;
+    border: 1px #0099FF;
     width: 90px;
     height: 43px; 
     text-align: center;
@@ -19,24 +19,32 @@ button{
     font-size: 17px;
     font-family: Arial, Helvetica, sans-serif;
 }
+button:hover{
+    background-color: #0073BF; 
+    color: #FF6600;
+}
 .Button {
-    margin: 5px;
-    background-color: #33AB20; /* Green */
+    /* margin: 5px; */
+    background-color: #0099FF; 
     color: white;
-    border: 1px #33AB20;
-    width: 220px; /* Set a width if needed */
-    padding: 30px 74.6px;
+    border: 1px #0099FF;
+    width: 100%; 
+    padding: 30px 0px;
     text-align: center;
     text-decoration: none;
     display: block;
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
 }
+.Button:hover{
+    background-color: #0073BF; 
+    color: #FF6600;
+}
 #storyBorder {
     margin: 20px;
     border-width: 2px;
     border-style: solid;
-    border-color: #33AB20;
+    border-color: #0099FF;
     width: 500px;
     height: 300px;
     position: relative;
@@ -45,14 +53,13 @@ button{
 #storyText{
     font-size: 18px;    
     font-family: Arial, Helvetica, sans-serif;
-
 }
 #inventoryBorder{
     display: inline-block;
     margin: 20px;
     border-width: 2px;
     border-style: solid;
-    border-color: #33AB20;
+    border-color: #0099FF;
     width: 500px;
     height: 300px;
 }

@@ -1,8 +1,10 @@
 body {
     height: 100%;
-    background-color: #001414; 
+    background-color: #18181C; 
+    /* #212126 */
     color: #DFF3F3;
 }
 h1{
-  color: #DFF3F3;
+  color: #FF6600;
+  /* color: #99FF00; */
 }

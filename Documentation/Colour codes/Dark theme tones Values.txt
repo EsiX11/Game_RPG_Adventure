@@ -1,0 +1,49 @@
+HEX
+#18181c
+#252528
+#323235
+#3f3f41
+#4c4c4e
+#59595a
+#666667
+#737373
+
+RGB
+rgb(24, 24, 28)
+rgb(37, 37, 40)
+rgb(50, 50, 53)
+rgb(63, 63, 65)
+rgb(76, 76, 78)
+rgb(89, 89, 90)
+rgb(102, 102, 103)
+rgb(115, 115, 115)
+
+HTML
+style="color:#18181c;"
+style="color:#252528;"
+style="color:#323235;"
+style="color:#3f3f41;"
+style="color:#4c4c4e;"
+style="color:#59595a;"
+style="color:#666667;"
+style="color:#737373;"
+
+CSS
+.color-1 {color: #18181c;}
+.color-2 {color: #252528;}
+.color-3 {color: #323235;}
+.color-4 {color: #3f3f41;}
+.color-5 {color: #4c4c4e;}
+.color-6 {color: #59595a;}
+.color-7 {color: #666667;}
+.color-8 {color: #737373;}
+
+SCSS
+$color-1: #18181c;
+$color-2: #252528;
+$color-3: #323235;
+$color-4: #3f3f41;
+$color-5: #4c4c4e;
+$color-6: #59595a;
+$color-7: #666667;
+$color-8: #737373;
