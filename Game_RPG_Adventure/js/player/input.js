@@ -34,20 +34,30 @@ function keypress_handler(event) {
     console.log("Keyboard button pressed", event.keyCode);   
 }
 
+function is_within_map_bounds(pos) {
+    // check if the location is within bounds
+    if (pos.y < 0 || pos.y >= current_map.length) {
+        return false;
+    }
+
+    if (pos.x < 0 || pos.x >= current_map[pos.y].length) {
+        return false;
+    }
+
+    return true;
+}
+
 function movement_check(direction) {
     // check if we can access the map
     if (!current_map) {
         return false;
     }
 
+    // get the new location with the direction
     let t = move_player(player_location, direction);
 
     // check if the new location is within bounds
-    if (t.y < 0 || t.y >= current_map.length) {
-        return false;
-    }
-
-    if (t.x < 0 || t.x >= current_map[t.y].length) {
+    if (!is_within_map_bounds(t)) {
         return false;
     }
 
