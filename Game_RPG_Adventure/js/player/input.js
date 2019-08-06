@@ -120,6 +120,9 @@ function init_player_position(map, start_id) {
 
 function update_field() {
     // todo: update the display with the new map info
+
+    // viewer table
+    let table = document.getElementById("location_viewer");
 }
 
 // handler for the buttons
