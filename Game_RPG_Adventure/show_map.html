@@ -6,28 +6,10 @@
 
 <div id="map_table"></div>
 
-<script src="js/table/table.js"></script>
+<script src="js/viewer/viewer.js"></script>
 <script src="js/json/json_loader.js"></script>
 
 <script>
-
-// colors for the biomes TODO: make this configurable
-var biome_array = ["#006100", "0A944D", "#007BE1", "B8CCDD", "F14444", "E47C00", "#D8BFD8", "#D2B48C"];
-
-function get_biome_color(index) {
-    if (isNaN(index)) {
-        // value is not filled in
-        return "#FFFFFF";
-    }
-
-    if (index < 0 || index >= biome_array.length) {
-        // value is out of index
-        return "#FFFFFF";
-    }
-    
-    // value within index        
-    return biome_array[index - 1];
-}
 
 // get it with a url as we can't load a local file
 var url = "https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/map1.json";

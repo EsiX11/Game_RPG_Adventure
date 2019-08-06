@@ -1,3 +1,21 @@
+// colors for the biomes TODO: make this configurable
+var biome_array = ["#006100", "0A944D", "#007BE1", "B8CCDD", "F14444", "E47C00", "#D8BFD8", "#D2B48C"];
+
+function get_biome_color(index) {
+    if (isNaN(index)) {
+        // value is not filled in
+        return "#FFFFFF";
+    }
+
+    if (index < 0 || index >= biome_array.length) {
+        // value is out of index
+        return "#FFFFFF";
+    }
+    
+    // value within index        
+    return biome_array[index - 1];
+}
+
 function create_table(table_div, table_array) {
     // create a table
     var table = document.createElement('TABLE');
