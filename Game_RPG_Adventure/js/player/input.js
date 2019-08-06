@@ -15,6 +15,17 @@ let current_map_name = null;
 
 const start_location_id = 7;
 
+// array for temporary storing the surroundings of the player
+let surroundings = new Array([0, 0, 0], 
+                             [0, 0, 0], 
+                             [0, 0, 0]);
+
+let surroundings_height = 3;
+let surroundings_width = 3;
+
+// create a table to show the current position to the player
+create_table(document.getElementById("location_viewer"), surroundings, false);
+
 // load the map
 load_json("https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/map1.json")
     .then(function(e){
@@ -25,10 +36,10 @@ load_json("https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/m
         // give the player a location on the map
         player_location = init_player_position(current_map, start_location_id);
 
-        // create a table to show the current position to the player
-        create_table(document.getElementById("location_viewer"), [[null, null, null], 
-                                                                  [null, null, null], 
-                                                                  [null, null, null]], false);
+        update_surroundings(current_map, player_location);
+
+        // fill the table with the correct surroundings
+        fill_table(document.getElementById("location_viewer"), surroundings, false, true);
 
         // todo: show a start screen or something
         // show_startscreen();
@@ -37,6 +48,30 @@ load_json("https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/m
 // handler for all the key presses
 function keypress_handler(event) {
     console.log("Keyboard button pressed", event.keyCode);   
+}
+
+function update_surroundings(map, player_location) {
+    // check if the map is not empty
+    if (!map || !map.length) {
+        return;
+    }
+
+    // get the width and height of the surroundings
+    const height = surroundings_height;
+    const width = surroundings_width;
+
+    for (let y = player_location.y - (height - 1) / 2, i = 0; i < height; y++, i++) {
+        for (let x = player_location.x - (width - 1) / 2, j = 0; j < width; x++, j++) {
+
+            // check if we are in map bounds
+            if (!is_within_map_bounds(new xy(x, y))) {
+                surroundings[i][j] = "";
+                continue;
+            }
+
+            surroundings[i][j] = map[y][x];
+        }   
+    }
 }
 
 function is_within_map_bounds(pos) {
@@ -122,7 +157,12 @@ function update_field() {
     // todo: update the display with the new map info
 
     // viewer table
-    let table = document.getElementById("location_viewer");
+    let viewer = document.getElementById("location_viewer");
+
+    update_surroundings(current_map, player_location);
+
+    // fill the table with the correct surroundings
+    fill_table(viewer, surroundings, false, true);
 }
 
 // handler for the buttons
