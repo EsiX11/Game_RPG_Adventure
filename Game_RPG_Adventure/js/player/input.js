@@ -28,7 +28,7 @@ load_json("https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/m
         // create a table to show the current position to the player
         create_table(document.getElementById("location_viewer"), [[null, null, null], 
                                                                   [null, null, null], 
-                                                                  [null, null, null]]);
+                                                                  [null, null, null]], false);
 
         // todo: show a start screen or something
         // show_startscreen();

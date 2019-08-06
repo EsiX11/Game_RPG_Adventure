@@ -16,7 +16,7 @@ function get_biome_color(index) {
     return biome_array[index - 1];
 }
 
-function create_table(table_div, table_array, infill = false) {
+function create_table(table_div, table_array, infill = true) {
     // create a table
     var table = document.createElement('TABLE');
 
