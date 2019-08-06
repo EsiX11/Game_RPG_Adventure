@@ -17,7 +17,7 @@ var url = "https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/m
 // create a table in the map_table with the json response
 load_json(url)
     .then(function(json) {
-        create_table(document.getElementById("map_table") , json["_map"]);
+        create_table(document.getElementById("map_table") , json["_map"], true);
     });
 
 </script>

@@ -16,7 +16,7 @@ function get_biome_color(index) {
     return biome_array[index - 1];
 }
 
-function create_table(table_div, table_array) {
+function create_table(table_div, table_array, infill = false) {
     // create a table
     var table = document.createElement('TABLE');
 
@@ -33,15 +33,18 @@ function create_table(table_div, table_array) {
             var td = document.createElement('TD');
             
             td.width = '25';
+            td.height = '25';
 
-            // get the value 
-            var td_value = table_array[i][j];
+            if (infill) {
+                // get the value 
+                var td_value = table_array[i][j];
 
-            // set the color of the table entry
-            td.setAttribute('bgcolor', get_biome_color(parseInt(td_value)));
+                // set the color of the table entry
+                td.setAttribute('bgcolor', get_biome_color(parseInt(td_value)));
 
-            // append the text to the entry
-            td.appendChild(document.createTextNode(td_value));
+                // append the text to the entry
+                td.appendChild(document.createTextNode(td_value));
+            }
 
             // add the entry to the row
             tr.appendChild(td); 
