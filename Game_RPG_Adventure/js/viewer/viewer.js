@@ -16,7 +16,7 @@ function get_biome_color(index) {
     return biome_array[index - 1];
 }
 
-function create_table(table_div, table_array, infill = true) {
+function create_table(table_div, table_array, text = true, color = false) {
     // create a table
     var table = document.createElement('TABLE');
 
@@ -36,17 +36,6 @@ function create_table(table_div, table_array, infill = true) {
             td.width = '25';
             td.height = '25';
 
-            if (infill) {
-                // get the value 
-                var td_value = table_array[i][j];
-
-                // set the color of the table entry
-                td.setAttribute('bgcolor', get_biome_color(parseInt(td_value)));
-
-                // append the text to the entry
-                td.appendChild(document.createTextNode(td_value));
-            }
-
             // add the entry to the row
             tr.appendChild(td); 
         }
@@ -57,4 +46,36 @@ function create_table(table_div, table_array, infill = true) {
 
     // add the table to the table div
     table_div.appendChild(table);
+
+    if (text || color) {
+        fill_table(table_div, table_array, text, color);
+    }
+}
+
+function fill_table(table_div, array, text = true, color = false) {
+    // get all the cells
+    let cells = table_div.children[0].children[0].children;
+
+    // error if the array is not the same size as the table
+    if (cells.length != array.length) {
+        return;
+    }
+
+    for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array[i].length; j++) {
+            if (text) {
+                // add a text node if there is none
+                if (!cells[i].children[j].childNodes.length) {
+                    cells[i].children[j].appendChild(document.createTextNode(""));
+                }
+
+                // change the value of the text box in the cell
+                cells[i].children[j].childNodes[0].nodeValue = array[i][j];
+            }
+
+            if (color) {
+                cells[i].children[j].bgColor = get_biome_color(parseInt(array[i][j]));
+            }
+        }        
+    }
 }
