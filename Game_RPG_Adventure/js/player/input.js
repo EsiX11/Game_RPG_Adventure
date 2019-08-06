@@ -7,16 +7,40 @@ class xy {
 }
 
 // variable for storing the location of the player
-var player_location = new xy(0, 0);
+let player_location = null;
+
+// the map that is used currently. If this is empty the map isn't loaded yet
+let current_map = null;
+let current_map_name = null;
+
+const start_location_id = 7;
+
+// load the map
+load_json("https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/map1.json")
+    .then(function(e){
+        // set the map and the map name
+        current_map = e["_map"];
+        current_map_name = e["_map_name"];
+
+        // give the player a location on the map
+        player_location = new init_player_position(current_map, start_location_id);
+
+        // todo: show a start screen or something
+        // show_startscreen();
+    });
 
 // handler for all the key presses
 function keypress_handler(event) {
     console.log("Keyboard button pressed", event.keyCode);   
 }
 
-// handler for the buttons
-function move_direction(evt) {
-    switch (evt.target.direction) {
+function movement_check(direction) {
+    // todo: add a movement check
+    return true;
+}
+
+function move_player(dir) {
+    switch (dir) {
         case 0:
             player_location.y += 1;
             break;
@@ -29,6 +53,44 @@ function move_direction(evt) {
         case 3:
             player_location.x -= 1;
             break;
+    }
+}
+
+function init_player_position(map, start_id) {
+    // search for the start id
+    for (let y = 0; y < map.length; y++) {
+        for (let x = 0; x < map[y].length; x++) {
+            if (map[y][x] == start_id) {
+                // return the xy of the first start location
+                return new xy(x, y);
+            }
+        }        
+    }
+
+    if (map.length && map[0].length) {
+        // we have a map with data so return the middle
+        return new xy(map.length / 2, map[0].length / 2);
+    }
+
+    // map doesn't have any values so return null
+    return null;
+}
+
+function update_field() {
+    // todo: update the display with the new map info
+}
+
+// handler for the buttons
+function move_direction(evt) {
+    // check if the player can actualy move to the targeted position
+    let posible = movement_check(evt.target.direction);
+
+    if (posible) {
+        // move the player to the new place
+        move_player(evt.target.direction);
+
+        // update the playing field
+        update_field();
     }
 
     console.log(player_location);
