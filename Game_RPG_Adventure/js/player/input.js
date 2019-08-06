@@ -7,28 +7,175 @@ class xy {
 }
 
 // variable for storing the location of the player
-var player_location = new xy(0, 0);
+let player_location = null;
+
+// the map that is used currently. If this is empty the map isn't loaded yet
+let current_map = null;
+let current_map_name = null;
+
+const start_location_id = 7;
+
+// array for temporary storing the surroundings of the player
+let surroundings = new Array([0, 0, 0], 
+                             [0, 0, 0], 
+                             [0, 0, 0]);
+
+let surroundings_height = 3;
+let surroundings_width = 3;
+
+// create a table to show the current position to the player
+create_table(document.getElementById("location_viewer"), surroundings, false);
+
+// load the map
+load_json("https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/map1.json")
+    .then(function(e){
+        // set the map and the map name
+        current_map = e["_map"];
+        current_map_name = e["_map_name"];
+
+        // give the player a location on the map
+        player_location = init_player_position(current_map, start_location_id);
+
+        update_surroundings(current_map, player_location);
+
+        // fill the table with the correct surroundings
+        fill_table(document.getElementById("location_viewer"), surroundings, false, true);
+
+        // todo: show a start screen or something
+        // show_startscreen();
+    });
 
 // handler for all the key presses
 function keypress_handler(event) {
     console.log("Keyboard button pressed", event.keyCode);   
 }
 
-// handler for the buttons
-function move_direction(evt) {
-    switch (evt.target.direction) {
+function update_surroundings(map, player_location) {
+    // check if the map is not empty
+    if (!map || !map.length) {
+        return;
+    }
+
+    // get the width and height of the surroundings
+    const height = surroundings_height;
+    const width = surroundings_width;
+
+    for (let y = player_location.y - (height - 1) / 2, i = 0; i < height; y++, i++) {
+        for (let x = player_location.x - (width - 1) / 2, j = 0; j < width; x++, j++) {
+
+            // check if we are in map bounds
+            if (!is_within_map_bounds(new xy(x, y))) {
+                surroundings[i][j] = "";
+                continue;
+            }
+
+            surroundings[i][j] = map[y][x];
+        }   
+    }
+}
+
+function is_within_map_bounds(pos) {
+    // check if the location is within bounds
+    if (pos.y < 0 || pos.y >= current_map.length) {
+        return false;
+    }
+
+    if (pos.x < 0 || pos.x >= current_map[pos.y].length) {
+        return false;
+    }
+
+    return true;
+}
+
+function movement_check(direction) {
+    // check if we can access the map
+    if (!current_map) {
+        return false;
+    }
+
+    // get the new location with the direction
+    let t = move_player(player_location, direction);
+
+    // check if the new location is within bounds
+    if (!is_within_map_bounds(t)) {
+        return false;
+    }
+
+    // check if the new location is a valid biome location
+    if (isNaN(parseInt(current_map[t.y][t.x]))) {
+        // location is not valid
+        return false;
+    }
+
+    // todo: check if we can go to the new cell biome wise
+
+    return true;
+}
+
+function move_player(curr_loc, dir) {
+    let ret = new xy(curr_loc.x, curr_loc.y); 
+
+    switch (dir) {
         case 0:
-            player_location.y += 1;
+            ret.y -= 1;
             break;
         case 1:
-            player_location.x += 1;
+            ret.x += 1;
             break;
         case 2:
-            player_location.y -= 1;
+            ret.y += 1;
             break;
         case 3:
-            player_location.x -= 1;
+            ret.x -= 1;
             break;
+    }
+
+    return ret;
+}
+
+function init_player_position(map, start_id) {
+    // search for the start id
+    for (let y = 0; y < map.length; y++) {
+        for (let x = 0; x < map[y].length; x++) {
+            if (map[y][x] == start_id) {
+                // return the xy of the first start location
+                return new xy(x, y);
+            }
+        }        
+    }
+
+    if (map.length && map[0].length) {
+        // we have a map with data so return the middle
+        return new xy(map.length / 2, map[0].length / 2);
+    }
+
+    // map doesn't have any values so return null
+    return null;
+}
+
+function update_field() {
+    // todo: update the display with the new map info
+
+    // viewer table
+    let viewer = document.getElementById("location_viewer");
+
+    update_surroundings(current_map, player_location);
+
+    // fill the table with the correct surroundings
+    fill_table(viewer, surroundings, false, true);
+}
+
+// handler for the buttons
+function move_direction(evt) {
+    // check if the player can actualy move to the targeted position
+    let posible = movement_check(evt.target.direction);
+
+    if (posible) {
+        // move the player to the new place
+        player_location = move_player(player_location, evt.target.direction);
+
+        // update the playing field
+        update_field();
     }
 
     console.log(player_location);
