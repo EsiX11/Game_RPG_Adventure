@@ -61,7 +61,13 @@ function movement_check(direction) {
         return false;
     }
 
-    // todo: check if we can go to the new cell
+    // check if the new location is a valid biome location
+    if (isNaN(parseInt(current_map[t.y][t.x]))) {
+        // location is not valid
+        return false;
+    }
+
+    // todo: check if we can go to the new cell biome wise
 
     return true;
 }
