@@ -23,7 +23,7 @@ load_json("https://esix11.github.io/Game_RPG_Adventure/Game_RPG_Adventure/json/m
         current_map_name = e["_map_name"];
 
         // give the player a location on the map
-        player_location = new init_player_position(current_map, start_location_id);
+        player_location = init_player_position(current_map, start_location_id);
 
         // todo: show a start screen or something
         // show_startscreen();
@@ -35,25 +35,46 @@ function keypress_handler(event) {
 }
 
 function movement_check(direction) {
-    // todo: add a movement check
+    // check if we can access the map
+    if (!current_map) {
+        return false;
+    }
+
+    let t = move_player(player_location, direction);
+
+    // check if the new location is within bounds
+    if (t.y < 0 || t.y >= current_map.length) {
+        return false;
+    }
+
+    if (t.x < 0 || t.x >= current_map[t.y].length) {
+        return false;
+    }
+
+    // todo: check if we can go to the new cell
+
     return true;
 }
 
-function move_player(dir) {
+function move_player(curr_loc, dir) {
+    let ret = new xy(curr_loc.x, curr_loc.y); 
+
     switch (dir) {
         case 0:
-            player_location.y += 1;
+            ret.y -= 1;
             break;
         case 1:
-            player_location.x += 1;
+            ret.x += 1;
             break;
         case 2:
-            player_location.y -= 1;
+            ret.y += 1;
             break;
         case 3:
-            player_location.x -= 1;
+            ret.x -= 1;
             break;
     }
+
+    return ret;
 }
 
 function init_player_position(map, start_id) {
@@ -87,7 +108,7 @@ function move_direction(evt) {
 
     if (posible) {
         // move the player to the new place
-        move_player(evt.target.direction);
+        player_location = move_player(player_location, evt.target.direction);
 
         // update the playing field
         update_field();
