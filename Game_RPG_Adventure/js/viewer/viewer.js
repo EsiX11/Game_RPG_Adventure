@@ -32,6 +32,7 @@ function create_table(table_div, table_array, infill = false) {
         for (var j = 0; j < table_array[i].length; j++) { 
             var td = document.createElement('TD');
             
+            // todo: change this to css as this is not supported in html5
             td.width = '25';
             td.height = '25';
 
