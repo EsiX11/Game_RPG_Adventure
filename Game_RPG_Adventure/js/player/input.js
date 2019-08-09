@@ -69,6 +69,7 @@ function update_surroundings(map, player_location) {
                 continue;
             }
 
+            // update the array with the correct map data
             surroundings[i][j] = map[y][x];
         }   
     }
@@ -154,12 +155,11 @@ function init_player_position(map, start_id) {
 }
 
 function update_field() {
-    // todo: update the display with the new map info
-
+    // update the array with the surroundings
+    update_surroundings(current_map, player_location);
+    
     // viewer table
     let viewer = document.getElementById("location_viewer");
-
-    update_surroundings(current_map, player_location);
 
     // fill the table with the correct surroundings
     fill_table(viewer, surroundings, false, true);
@@ -176,6 +176,10 @@ function move_direction(evt) {
 
         // update the playing field
         update_field();
+    }
+    else {
+        // todo: tell the user we can't do this move in a better way
+        alert("Currently you can't do this move.");
     }
 
     console.log(player_location);
